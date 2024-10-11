@@ -1,4 +1,4 @@
-public enum Tipo {
+public enum TipoEntidad {
 
     Serie = 'S',
     Pelicula = 'P',
@@ -10,7 +10,7 @@ public class SeriePeliculaLibro
 {
     public int Id { get; set; }
     public string Nombre { get; set; } = "";
-    public Tipo Tipo { get; set; } = Tipo.Serie;
+    public TipoEntidad Tipo { get; set; } = TipoEntidad.Serie;
     public string Pais { get; set; } = "";
     public string Idioma { get; set; } = "";
     public string FotoUrl { get; set; } = "";

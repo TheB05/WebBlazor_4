@@ -1,3 +1,83 @@
 @page "/entidad/{tipo}/editar"
+@rendermode InteractiveServer
+@inject NavigationManager NavMan
+@inject IJSRuntime JSx
 
 <PageTitle>Editar entidad</PageTitle>
+<h3>Editando @Tipo</h3>
+
+<EditForm Model = "instancia" OnInvalidSubmit = "GuardarDatos">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for = "nombre">Nombre</label>
+        <InputText id = "nombre" class="form-control" @bind-Value = "instancia.Nombre" />
+    </div>
+
+    <div class="form-group">
+        <label for = "pais">País</label>
+        <InputText id = "pais" class="form-control" @bind-Value = "instancia.Pais" />
+    </div>
+
+    <div class="form-group">
+        <label for = "idioma">Idioma</label>
+        <InputText id = "idioma" class="form-control" @bind-Value = "instancia.Idioma" />
+    </div>
+
+    <div class="form-group">
+        <label for = "resumen">Resumen</label>
+        <InputText id = "resumen" class="form-control" @bind-Value = "instancia.Resumen" />
+    </div>
+
+    <div class="form-group">
+        <label for = "FotoUrl">Foto</label>
+        <input type = "url" id = "FotoUrl" class="form-control" @bind = "instancia.FotoUrl" />
+    </div>
+
+    <br>
+    <div class="text-end">
+        <center>
+        <button type = "button" class="btn btn-success">Guardar</button>
+        </center>
+    </div>
+
+</EditForm>
+
+@code{
+
+    [Parameter]
+    public string Tipo { get; set; } = "";
+
+    protected override async Task OnParametersSetAsync(){
+
+        switch(Tipo){
+
+            case "libros":
+                tipoEntidad = TipoEntidad.Libro;
+                break;
+            
+            case "peliculas":
+                tipoEntidad = TipoEntidad.Pelicula;
+                break;
+
+            case "series":
+                tipoEntidad = TipoEntidad.Serie;
+                break;
+
+            default:
+                //await JSx.InvokeVoidAsync("alert", "El tipo de entidad no es válido");
+                NavMan.NavigateTo("/");
+                break;
+        }
+    }
+
+    SeriePeliculaLibro instancia = new SeriePeliculaLibro();
+
+    TipoEntidad tipoEntidad;
+
+    async Task GuardarDatos(){
+
+        
+    }
+}
