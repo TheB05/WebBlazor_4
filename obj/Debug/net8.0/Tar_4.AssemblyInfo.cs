@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Tar_4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d6cb6d616cc5f743dce69967e99b10b601037ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+39821bb56f4dacb8ee59e5650e5e0815b354191c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Tar_4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Tar_4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
