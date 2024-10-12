@@ -2,11 +2,12 @@
 @rendermode InteractiveServer
 @inject NavigationManager NavMan
 @inject IJSRuntime JSx
+@inject SerieContext Sc
 
 <PageTitle>Editar entidad</PageTitle>
 <h3>Editando @Tipo</h3>
 
-<EditForm Model = "instancia" OnInvalidSubmit = "GuardarDatos">
+<EditForm Model = "instancia" OnValidSubmit = "GuardarDatos">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -35,11 +36,8 @@
         <input type = "url" id = "FotoUrl" class="form-control" @bind = "instancia.FotoUrl" />
     </div>
 
-    <br>
-    <div class="text-end">
-        <center>
-        <button type = "button" class="btn btn-success">Guardar</button>
-        </center>
+    <div class="text-center mt-3">
+        <button type = "submit" class="btn btn-success">Guardar</button>
     </div>
 
 </EditForm>
@@ -78,6 +76,10 @@
 
     async Task GuardarDatos(){
 
-        
+        instancia.Tipo = tipoEntidad;
+        Sc.SeriePeliculaLibros.Add(instancia);
+        await Sc.SaveChangesAsync();
+        await JSx.InvokeVoidAsync("alert", "Datos registrados.");
+        NavMan.NavigateTo($"/entidad/{Tipo}");
     }
 }
