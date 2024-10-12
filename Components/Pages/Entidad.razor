@@ -32,6 +32,9 @@
                 <td>@item.Idioma</td>
                 <td>@item.Resumen</td>
                 <td><img src="@item.FotoUrl" alt="@item.Nombre" width="100" /></td>
+                <td>
+                    <button class="btn btn-success" @onclick = "() => editar(item.Id)">Editar</button>
+                </td>
             </tr>
         }
     </tbody>
@@ -65,6 +68,11 @@
     }
 
     List<SeriePeliculaLibro> lista = new List<SeriePeliculaLibro>();
+
+    private void editar(int id){
+
+        NavMan.NavigateTo($"entidad/{Tipo}/editar/{id}");
+    }
 
     private void AgregarNuevo(){
 

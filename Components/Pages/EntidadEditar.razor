@@ -1,4 +1,5 @@
 @page "/entidad/{tipo}/editar"
+@page "/entidad/{Tipo}/editar/{id:int}"
 @rendermode InteractiveServer
 @inject NavigationManager NavMan
 @inject IJSRuntime JSx
@@ -40,12 +41,26 @@
         <button type = "submit" class="btn btn-success">Guardar</button>
     </div>
 
+    <h4>Personajes</h4>
+
+    <table class="table table-hover">
+
+        <thead>
+            
+        </thead>
+    </table>
+
 </EditForm>
+
 
 @code{
 
     [Parameter]
     public string Tipo { get; set; } = "";
+
+    [Parameter]
+
+    public int Id { get; set; } = 0;
 
     protected override async Task OnParametersSetAsync(){
 
@@ -77,9 +92,29 @@
     async Task GuardarDatos(){
 
         instancia.Tipo = tipoEntidad;
-        Sc.SeriePeliculaLibros.Add(instancia);
+
+        if (instancia.Id > 0){
+            
+            Sc.SeriePeliculaLibros.Update(instancia);
+        }
+        else{
+            Sc.SeriePeliculaLibros.Add(instancia);
+        }
+        
         await Sc.SaveChangesAsync();
         await JSx.InvokeVoidAsync("alert", "Datos registrados.");
         NavMan.NavigateTo($"/entidad/{Tipo}");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender){
+
+        if (firstRender){
+
+            if (Id > 0){
+
+            instancia = Sc.SeriePeliculaLibros.FirstOrDefault(x => x.Id == Id)?? new SeriePeliculaLibro();
+            StateHasChanged();
+            }
+        }
     }
 }
