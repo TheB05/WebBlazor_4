@@ -37,18 +37,44 @@
         <input type = "url" id = "FotoUrl" class="form-control" @bind = "instancia.FotoUrl" />
     </div>
 
-    <div class="text-center mt-3">
-        <button type = "submit" class="btn btn-success">Guardar</button>
-    </div>
-
     <h4>Personajes</h4>
 
     <table class="table table-hover">
 
         <thead>
-            
+            <th>Nombre</th>
+            <th>Apodo</th>
+            <th>Raza</th>
+            <th>Foto</th>
+            <th>Edad</th>
+            <th>Signo Zodiacal</th>
+            <th>Poder característico</th>
+            <td>
+                <button type = "button" class="btn btn-primary" @onclick = "agregarPersonaje">Agregar</button>
+            </td>
         </thead>
+        <tbody>
+            @foreach(var item in instancia.Personajes){
+
+                <tr>
+                    <td>
+                        <img style="height:70px" src="@item.FotoUrl" alt="@item.Nombre" />
+                    </td>
+                    <td><InputText @bind-Value = "item.Nombre" class = "form-control" /></td>
+                    <td><InputText @bind-Value = "item.Apodo" class = "form-control" /></td>
+                    <td><InputText @bind-Value = "item.Raza" class = "form-control" /></td>
+                    <td><InputText @bind-Value = "item.FotoUrl" class = "form-control" /></td>
+                    <td><InputNumber @bind-Value = "item.Edad" class = "form-control" /></td>
+                    <td><InputText @bind-Value = "item.SignoZodiacal" class = "form-control" /></td>
+                    <td><InputText @bind-Value = "item.PoderCaracteristico" class = "form-control" /></td>
+                </tr>
+            }
+        </tbody>
     </table>
+
+    <div class="text-center mt-3">
+        <button type = "submit" class="btn btn-success">Guardar</button>
+    </div>
 
 </EditForm>
 
@@ -61,6 +87,12 @@
     [Parameter]
 
     public int Id { get; set; } = 0;
+
+    void agregarPersonaje(){
+
+        instancia.Personajes.Add(new Personaje());
+        StateHasChanged();
+    }
 
     protected override async Task OnParametersSetAsync(){
 
